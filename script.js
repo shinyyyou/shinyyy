@@ -236,7 +236,7 @@ function finishPurchase() {
     
     // Open WhatsApp
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/5545991013391?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/5545998011346?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
     
     // Show success message
