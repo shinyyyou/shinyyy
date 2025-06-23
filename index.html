@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shinny You </title>
+    <meta name="description" content="">
+    <meta name="author" content="Shinny You">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="shop-header">
+            <h1 class="shop-title">Shinny You</h1>
+            <p class="shop-subtitle">Seja Bem Vinda</p>
+            <span class="launch-badge">Lançamento Especial</span>
+        </header>
+
+        <main class="main-content">
+            <div class="products-header">
+                <h2 class="products-title">Produtos em destaque</h2>
+                <button id="cart-btn" class="cart-button">
+                    🛒 Carrinho (<span id="cart-count">0</span>)
+                </button>
+            </div>
+
+            <div id="products-grid" class="products-grid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </main>
+
+        <!-- Cart Sidebar -->
+        <aside id="cart-sidebar" class="cart-sidebar">
+            <div class="cart-header">
+                <h3>Seu Carrinho</h3>
+                <button id="close-cart" class="close-btn">×</button>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <div id="empty-cart" class="empty-cart">Seu carrinho está vazio</div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total: R$ <span id="cart-total">0.00</span></span>
+                </div>
+                <button id="finish-btn" class="finish-btn" disabled>Finalizar Compra</button>
+            </div>
+        </aside>
+
+        <!-- Cart Overlay -->
+        <div id="cart-overlay" class="cart-overlay"></div>
+
+        <footer class="footer">
+            © 2025 Shinny You
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
