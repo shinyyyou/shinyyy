@@ -49,7 +49,7 @@ const products = [
     id: 7,
     name: "Corretivo Líquido Lua & Neve",
     price: 14.90,
-    image: "img/",
+    image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg",
     stock: 6
   
   },
@@ -57,7 +57,7 @@ const products = [
     id: 8,
     name: "Pó Facial Rosa MOsqueta Fenzza",
     price: 14.90,
-    image: "",
+    image: "img/unnamed(1).jpg",
     stock: 6
   
   }
@@ -318,6 +318,7 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
 
 
 
