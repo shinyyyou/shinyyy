@@ -41,7 +41,7 @@ const products = [
     id: 6,
     name: "Paleta de iluminador LOVE-max Love  ",
     price: 19.90,
-    image: "",
+    image: "img/775392d6-299c-4535-8f79-4dc112f15cfe.jpeg",
     stock: "Últimas unidades"
   
   },
@@ -49,7 +49,7 @@ const products = [
     id: 7,
     name: "Corretivo Líquido Lua & Neve",
     price: 14.90,
-    image: "",
+    image: "img/",
     stock: 6
   
   },
@@ -318,6 +318,7 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
 
 
 
