@@ -27,11 +27,19 @@ const products = [
     price: 14.90,
     image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg",
     stock: 2
+  
+  },
+  {
+    id: 4,
+    name: "Base líquida SARAH`S BEAUTY ",
+    price: 14.90,
+    image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg",
+    stock: 6
+  
   }
 ];
 
-
-
+  
 // Cart state
 let cart = [];
 
@@ -286,3 +294,4 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
