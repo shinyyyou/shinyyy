@@ -30,10 +30,18 @@ const products = [
   
   },
   {
-    id: 4,
+    id: 5,
     name: "Base líquida SARAH`S BEAUTY ",
     price: 14.90,
     image: "img/unnamed.jpg",
+    stock: 6
+  
+  },
+  {
+    id: 6,
+    name: "Paleta de iluminador LOVE-max Love  ",
+    price: 19.90,
+    image: "",
     stock: 6
   
   }
@@ -294,5 +302,6 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
 
 
