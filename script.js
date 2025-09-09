@@ -5,14 +5,14 @@ const products = [
     name: "Gloss Dream Safira",
     price: 15.90,
     image: "img/d160bb94-3c09-4014-817a-5dee7c7df901.jpeg",
-    stock: 2
+    stock: "Últimas unidades"
   },
   {
     id: 2,
     name: "Blush Safira Cores Variadas",
     price: 21.90,
     image: "img/179691af-2ffe-4378-b356-1fab83238041.jpeg",
-    stock: 8
+    stock: "Últimas unidades"
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const products = [
     name: "Máscara de Cílios Efeito Boneca Safira",
     price: 14.90,
     image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg",
-    stock: 2
+    stock: "Últimas unidades"
   
   },
   {
@@ -41,6 +41,22 @@ const products = [
     id: 6,
     name: "Paleta de iluminador LOVE-max Love  ",
     price: 19.90,
+    image: "",
+    stock: "Últimas unidades"
+  
+  },
+  {
+    id: 7,
+    name: "Corretivo Líquido Lua & Neve",
+    price: 14.90,
+    image: "",
+    stock: 6
+  
+  },
+  {
+    id: 8,
+    name: "Pó Facial Rosa MOsqueta Fenzza",
+    price: 14.90,
     image: "",
     stock: 6
   
@@ -302,6 +318,7 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
 
 
 
