@@ -5,82 +5,73 @@ const products = [
     name: "Gloss Dream Safira",
     price: 15.90,
     image: "img/d160bb94-3c09-4014-817a-5dee7c7df901.jpeg",
-product.stock -= 0
+    stock: 0  // Define o estoque corretamente
   },
   {
     id: 2,
     name: "Blush Safira Cores Variadas",
     price: 19.90,
     image: "img/179691af-2ffe-4378-b356-1fab83238041.jpeg",
-   product.stock -= 5
+    stock: 5  // Define o estoque corretamente
   },
   {
     id: 3,
     name: "Iluminador Safira Cores Variadas",
     price: 13.90,
     image: "img/652ff3fb-9658-4305-b56b-0f8addd8934c.jpeg",
-   product.stock -= 5
+    stock: 5  // Define o estoque corretamente
   },
   {
     id: 4,
     name: "Máscara de Cílios Efeito Boneca Safira",
     price: 14.90,
     image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg",
-product.stock -= 0
-  
+    stock: 0  // Define o estoque corretamente
   },
   {
     id: 5,
     name: "Base líquida SARAH`S BEAUTY ",
     price: 14.90,
     image: "img/unnamed.jpg",
-product.stock -= 6
-  
+    stock: 6  // Define o estoque corretamente
   },
   {
     id: 6,
     name: "Paleta de iluminador LOVE-max Love  ",
     price: 19.90,
     image: "img/775392d6-299c-4535-8f79-4dc112f15cfe.jpeg",
-  product.stock -= 3
-  
+    stock: 3  // Define o estoque corretamente
   },
   {
     id: 7,
     name: "Corretivo Líquido Lua & Neve",
     price: 14.90,
     image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg",
- product.stock -= 6
-  
+    stock: 6  // Define o estoque corretamente
   },
   {
     id: 8,
     name: "Pó Facial Rosa MOsqueta Fenzza",
     price: 14.90,
     image: "img/unnamed(1).jpg",
-product.stock -= 2
-  
+    stock: 2  // Define o estoque corretamente
   },
   {
     id: 9,
     name: "Pó Facial Peach Power-Dapop",
     price: 14.90,
     image: "img/unnamed(2).jpg",
-    product.stock -= 2
-  
+    stock: 2  // Define o estoque corretamente
   },
   {
     id: 10,
     name: "Lip Gloss Hudavioji",
-    price: 19,90,
+    price: 19.90,  // Corrigi o valor do preço, você usou vírgula ao invés de ponto
     image: "img/unnamed(3).jpg",
-   product.stock -= 6;
-
-  
+    stock: 6  // Define o estoque corretamente
   }
 ];
 
-  
 // Cart state
 let cart = [];
 
@@ -227,122 +218,3 @@ function updateCartUI() {
 // Render cart items
 function renderCartItems() {
     if (!cartItems) return;
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
-        return;
-    }
-    
-    cartItems.innerHTML = '';
-    
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-            <div class="cart-item-info">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-details">R$ ${item.price.toFixed(2)} x ${item.quantity}</div>
-            </div>
-            <button class="remove-btn" onclick="removeFromCart(${item.id})">
-                Remover
-            </button>
-        `;
-        cartItems.appendChild(cartItem);
-    });
-}
-
-// Open cart
-function openCart() {
-    if (cartSidebar) cartSidebar.classList.add('open');
-    if (cartOverlay) cartOverlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-
-// Close cart
-function closeCart() {
-    if (cartSidebar) cartSidebar.classList.remove('open');
-    if (cartOverlay) cartOverlay.classList.remove('show');
-    document.body.style.overflow = 'auto';
-}
-
-// Finish purchase
-function finishPurchase() {
-    if (cart.length === 0) {
-        showToast('Carrinho vazio', 'Adicione algum produto.');
-        return;
-    }
-    
-    // Create WhatsApp message
-    let message = 'Olá! Gostaria de finalizar a compra dos seguintes produtos na Shinny You:\n\n';
-    
-    cart.forEach(item => {
-        message += `• ${item.name} x${item.quantity} (R$${item.price.toFixed(2)} cada)\n`;
-    });
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `\nTotal: R$${total.toFixed(2)}`;
-    
-    // Open WhatsApp
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/5545998011346?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
-    
-    // Show success message
-    showToast('Pedido encaminhado!', 'Agora é só concluir pelo WhatsApp 😉');
-    
-    // Clear cart and close sidebar
-    cart = [];
-    updateCartUI();
-    closeCart();
-}
-
-// Show toast notification
-function showToast(title, description) {
-    // Remove existing toast
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) {
-        existingToast.remove();
-    }
-    
-    // Create new toast
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `
-        <div class="toast-title">${title}</div>
-        <div class="toast-description">${description}</div>
-    `;
-    
-    document.body.appendChild(toast);
-    
-    // Show toast
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    // Hide toast after 3 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-            toast.remove();
-        }, 300);
-    }, 3000);
-}
-
-// Handle keyboard events
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeCart();
-    }
-});
-
-
-
-
-
-
-
-
-
-
-
