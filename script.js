@@ -179,15 +179,23 @@ function updateCart() {
 
     // Habilita ou desabilita o botão de finalizar compra
     finishBtn.disabled = cart.length === 0;
+
+    // Atualiza o link do botão de finalizar compra com WhatsApp
+    const finishBtnWhatsApp = document.getElementById('finish-btn-whatsapp');
+    finishBtnWhatsApp.disabled = cart.length === 0;
+
+    // Gera o link para o WhatsApp com os itens do carrinho
+    if (cart.length > 0) {
+        let message = 'Olá, gostaria de finalizar minha compra:\n\n';
+        cart.forEach(item => {
+            message += `${item.name} (x${item.quantity}) - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
+        });
+        message += `\nTotal: R$ ${totalPrice.toFixed(2)}\n\nAguardo o retorno.`;
+        
+        const encodedMessage = encodeURIComponent(message);
+        finishBtnWhatsApp.href = `https://wa.me/5511999999999?text=${encodedMessage}`; // Troque o número pelo seu WhatsApp
+    }
 }
 
 // Abrir e fechar o carrinho lateral
-document.getElementById('cart-btn').addEventListener('click', function () {
-    document.getElementById('cart-sidebar').style.display = 'block';
-    document.getElementById('cart-overlay').style.display = 'block';
-});
-
-document.getElementById('close-cart').addEventListener('click', function () {
-    document.getElementById('cart-sidebar').style.display = 'none';
-    document.getElementById('cart-overlay').style.display = 'none';
-});
+document.getElementById('cart-btn').addEventListener('
