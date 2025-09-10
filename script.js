@@ -71,10 +71,10 @@ const products = [
   },
   {
     id: 10,
-    name: "Pó Facial Rosa MOsqueta Fenzza",
-    price: 14.90,
-    image: "img/unnamed(2).jpg",
-    stock: 2
+    name: "Lip Gloss Hudavioji",
+    price: 19,90,
+    image: "img/unnamed(3).jpg",
+    stock: 6
   
   }
 ];
@@ -334,6 +334,7 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
 
 
 
