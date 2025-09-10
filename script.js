@@ -72,61 +72,25 @@ const products = [
   }
 ];
 
-// Cart state
-let cart = [];
-
-// DOM Elements
-const productsGrid = document.getElementById('products-grid'); // A referência ao grid de produtos
-const cartBtn = document.getElementById('cart-btn');
-const cartCount = document.getElementById('cart-count');
-const cartSidebar = document.getElementById('cart-sidebar');
-const cartOverlay = document.getElementById('cart-overlay');
-const closeCartBtn = document.getElementById('close-cart');
-const cartItems = document.getElementById('cart-items');
-const cartTotal = document.getElementById('cart-total');
-const finishBtn = document.getElementById('finish-btn');
-const emptyCart = document.getElementById('empty-cart');
-
-// Initialize the app
+// Verificação de carregamento do script e renderização dos produtos
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing app...');
-    
-    // Verifique se o 'productsGrid' existe
-    if (productsGrid) {
-        console.log('Elemento "products-grid" encontrado!');
-    } else {
-        console.error('Elemento "products-grid" não encontrado!');
-    }
-    
-    console.log('Products:', products);
-    console.log('Products grid element:', productsGrid);
-    
-    // Small delay to ensure DOM is fully ready
-    setTimeout(() => {
-        renderProducts();
-        updateCartUI();
-    }, 100);
-    
-    // Event listeners
-    if (cartBtn) cartBtn.addEventListener('click', openCart);
-    if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
-    if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
-    if (finishBtn) finishBtn.addEventListener('click', finishPurchase);
+    renderProducts();  // Tente renderizar os produtos
 });
 
-// Render products
 function renderProducts() {
     console.log('Rendering products...');
     
+    const productsGrid = document.getElementById('products-grid');
     if (!productsGrid) {
-        console.error('Products grid element not found!');
+        console.error('Elemento "products-grid" não encontrado!');
         return;
     }
     
-    productsGrid.innerHTML = ''; // Limpar o grid antes de renderizar os produtos
+    productsGrid.innerHTML = ''; // Limpa o grid antes de adicionar os produtos
     
     products.forEach(product => {
-        console.log('Creating product card for:', product.name);
+        console.log('Criando card para o produto:', product.name);
         
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
@@ -150,5 +114,5 @@ function renderProducts() {
         productsGrid.appendChild(productCard);
     });
     
-    console.log('Products rendered successfully');
+    console.log('Produtos renderizados com sucesso!');
 }
