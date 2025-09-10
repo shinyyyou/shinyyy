@@ -67,7 +67,7 @@ const products = [
     id: 10,
     name: "Lip Gloss Hudavioji",
     price: 19.90,
-    image: "img/unnamed (3).jpg",
+    image: "img/lip_gloss_chaveiro_cor_01_a_06_com_24un_de_10ml_hudamoji_22833_2_913f56393de86b5f05b7f3cf1b13fa6f.webp",
     stock: 6
   }
 ];
@@ -116,4 +116,5 @@ function renderProducts() {
     
     console.log('Produtos renderizados com sucesso!');
 }
+
 
