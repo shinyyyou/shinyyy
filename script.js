@@ -58,7 +58,7 @@ const products = [
     name: "Pó Facial Rosa MOsqueta Fenzza",
     price: 14.90,
     image: "img/unnamed(1).jpg",
-    stock: 6
+    stock: 2
   
   },
   {
@@ -334,6 +334,7 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
 
 
 
