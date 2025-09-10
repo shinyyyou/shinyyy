@@ -1,151 +1,62 @@
 // Dados dos produtos
 const products = [
-  {
-    id: 1,
-    name: "Gloss Dream Safira",
-    price: 15.90,
-    image: "img/d160bb94-3c09-4014-817a-5dee7c7df901.jpeg",
-    stock: 0
-  },
-  {
-    id: 2,
-    name: "Blush Safira Cores Variadas",
-    price: 19.90,
-    image: "img/179691af-2ffe-4378-b356-1fab83238041.jpeg",
-    stock: 5
-  },
-  {
-    id: 3,
-    name: "Iluminador Safira Cores Variadas",
-    price: 13.90,
-    image: "img/652ff3fb-9658-4305-b56b-0f8addd8934c.jpeg",
-    stock: 5
-  },
-  {
-    id: 4,
-    name: "Máscara de Cílios Efeito Boneca Safira",
-    price: 14.90,
-    image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg",
-    stock: 0
-  },
-  {
-    id: 5,
-    name: "Base líquida SARAH`S BEAUTY ",
-    price: 14.90,
-    image: "img/unnamed.jpg",
-    stock: 6
-  },
-  {
-    id: 6,
-    name: "Paleta de iluminador LOVE-max Love  ",
-    price: 19.90,
-    image: "img/775392d6-299c-4535-8f79-4dc112f15cfe.jpeg",
-    stock: 3
-  },
-  {
-    id: 7,
-    name: "Corretivo Líquido Lua & Neve",
-    price: 14.90,
-    image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg",
-    stock: 6
-  },
-  {
-    id: 8,
-    name: "Pó Facial Rosa MOsqueta Fenzza",
-    price: 14.90,
-    image: "img/unnamed (1).jpg",
-    stock: 2
-  },
-  {
-    id: 9,
-    name: "Pó Facial Peach Power-Dapop",
-    price: 14.90,
-    image: "img/unnamed (2).jpg",
-    stock: 2
-  },
-  {
-    id: 10,
-    name: "Lip Gloss Hudavioji",
-    price: 19.90,
-    image: "img/lip_gloss_chaveiro_cor_01_a_06_com_24un_de_10ml_hudamoji_22833_2_913f56393de86b5f05b7f3cf1b13fa6f.webp",
-    stock: 6
-  }
+    { id: 1, name: "Gloss Dream Safira", price: 15.90, image: "img/d160bb94-3c09-4014-817a-5dee7c7df901.jpeg", stock: 0 },
+    { id: 2, name: "Blush Safira Cores Variadas", price: 19.90, image: "img/179691af-2ffe-4378-b356-1fab83238041.jpeg", stock: 5 },
+    { id: 3, name: "Iluminador Safira Cores Variadas", price: 13.90, image: "img/652ff3fb-9658-4305-b56b-0f8addd8934c.jpeg", stock: 5 },
+    { id: 4, name: "Máscara de Cílios Efeito Boneca Safira", price: 14.90, image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg", stock: 0 },
+    { id: 5, name: "Base líquida SARAH`S BEAUTY", price: 14.90, image: "img/unnamed.jpg", stock: 6 },
+    { id: 6, name: "Paleta de iluminador LOVE-max Love", price: 19.90, image: "img/775392d6-299c-4535-8f79-4dc112f15cfe.jpeg", stock: 3 },
+    { id: 7, name: "Corretivo Líquido Lua & Neve", price: 14.90, image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg", stock: 6 },
+    { id: 8, name: "Pó Facial Rosa MOsqueta Fenzza", price: 14.90, image: "img/unnamed (1).jpg", stock: 2 },
+    { id: 9, name: "Pó Facial Peach Power-Dapop", price: 14.90, image: "img/unnamed (2).jpg", stock: 2 },
+    { id: 10, name: "Lip Gloss Hudavioji", price: 19.90, image: "img/lip_gloss_chaveiro_cor_01_a_06_com_24un_de_10ml_hudamoji_22833_2_913f56393de86b5f05b7f3cf1b13fa6f.webp", stock: 6 }
 ];
 
-// Dados do carrinho
 let cart = [];
 
-// Atualizando o carrinho com os produtos
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM carregado, inicializando aplicação...');
-    renderProducts();  // Renderiza os produtos
-    updateCart();      // Atualiza o estado do carrinho
-});
-
-// Função para renderizar os produtos na página
+// Função para renderizar os produtos
 function renderProducts() {
-    console.log('Renderizando os produtos...');
-    
     const productsGrid = document.getElementById('products-grid');
-    if (!productsGrid) {
-        console.error('Elemento "products-grid" não encontrado!');
-        return;
-    }
-
     productsGrid.innerHTML = ''; // Limpa o grid antes de adicionar os produtos
 
     products.forEach(product => {
-        console.log('Criando card para o produto:', product.name);
-        
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
-        
+
         const isOutOfStock = product.stock === 0;
-        const stockDisplay = product.stock <= 3 ? `Apenas ${product.stock} restantes!` : `${product.stock} em estoque`;
-        
         productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy" onerror="console.error('Falha ao carregar imagem: ${product.image}')">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
             <h2 class="product-name">${product.name}</h2>
             <span class="product-price">R$ ${product.price.toFixed(2)}</span>
-            <div class="stock-info ${product.stock <= 3 ? 'low-stock' : ''} ${isOutOfStock ? 'out-of-stock' : ''}">
-                ${isOutOfStock ? 'Fora de estoque' : stockDisplay}
-            </div>
-            <button class="add-to-cart-btn ${isOutOfStock ? 'disabled' : ''}" 
-                    onclick="addToCart(${product.id})" 
-                    ${isOutOfStock ? 'disabled' : ''}>
+            <div class="stock-info">${product.stock > 0 ? `${product.stock} em estoque` : 'Fora de estoque'}</div>
+            <button class="add-to-cart-btn ${isOutOfStock ? 'disabled' : ''}" onclick="addToCart(${product.id})" ${isOutOfStock ? 'disabled' : ''}>
                 ${isOutOfStock ? 'Indisponível' : 'Adicionar ao Carrinho'}
             </button>
         `;
         productsGrid.appendChild(productCard);
     });
-
-    console.log('Produtos renderizados com sucesso!');
 }
 
-// Função para adicionar produto ao carrinho
+// Função para adicionar um produto ao carrinho
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
-    if (!product || product.stock <= 0) return;
+    if (product && product.stock > 0) {
+        product.stock--; // Reduz o estoque
 
-    // Atualiza o estoque do produto
-    product.stock--;
+        // Verifica se o produto já está no carrinho
+        const cartItem = cart.find(item => item.id === productId);
+        if (cartItem) {
+            cartItem.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
 
-    // Adiciona o produto ao carrinho
-    const cartItem = cart.find(item => item.id === productId);
-    if (cartItem) {
-        cartItem.quantity++;
-    } else {
-        cart.push({ ...product, quantity: 1 });
+        updateCart();
+        renderProducts(); // Atualiza a visualização dos produtos
     }
-
-    console.log(`${product.name} adicionado ao carrinho!`);
-
-    // Atualiza a exibição do carrinho
-    updateCart();
-    renderProducts();  // Re-renderiza os produtos (para atualizar o estoque)
 }
 
-// Função para atualizar a visualização do carrinho
+// Função para atualizar o carrinho
 function updateCart() {
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
@@ -160,42 +71,16 @@ function updateCart() {
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     cartTotal.textContent = totalPrice.toFixed(2);
 
-    // Exibe os itens do carrinho
+    // Exibe os itens no carrinho
     cartSidebar.innerHTML = '';
     if (cart.length === 0) {
-        cartSidebar.innerHTML = '<div id="empty-cart" class="empty-cart">Seu carrinho está vazio</div>';
+        cartSidebar.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
     } else {
         cart.forEach(item => {
             const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
+            cartItem.className = 'cart-item';
             cartItem.innerHTML = `
-                <span class="cart-item-name">${item.name}</span>
-                <span class="cart-item-price">R$ ${item.price.toFixed(2)}</span>
-                <span class="cart-item-quantity">x${item.quantity}</span>
+                <span>${item.name} (x${item.quantity})</span>
+                <span>R$ ${(item.price * item.quantity).toFixed(2)}</span>
             `;
-            cartSidebar.appendChild(cartItem);
-        });
-    }
-
-    // Habilita ou desabilita o botão de finalizar compra
-    finishBtn.disabled = cart.length === 0;
-
-    // Atualiza o link do botão de finalizar compra com WhatsApp
-    const finishBtnWhatsApp = document.getElementById('finish-btn-whatsapp');
-    finishBtnWhatsApp.disabled = cart.length === 0;
-
-    // Gera o link para o WhatsApp com os itens do carrinho
-    if (cart.length > 0) {
-        let message = 'Olá, gostaria de finalizar minha compra:\n\n';
-        cart.forEach(item => {
-            message += `${item.name} (x${item.quantity}) - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
-        });
-        message += `\nTotal: R$ ${totalPrice.toFixed(2)}\n\nAguardo o retorno.`;
-        
-        const encodedMessage = encodeURIComponent(message);
-        finishBtnWhatsApp.href = `https://wa.me/5511999999999?text=${encodedMessage}`; // Troque o número pelo seu WhatsApp
-    }
-}
-
-// Abrir e fechar o carrinho lateral
-document.getElementById('cart-btn').addEventListener('
+            cartSidebar.appendChild(cartItem
