@@ -5,28 +5,28 @@ const products = [
     name: "Gloss Dream Safira",
     price: 15.90,
     image: "img/d160bb94-3c09-4014-817a-5dee7c7df901.jpeg",
-    stock: 0
+product.stock -= 0
   },
   {
     id: 2,
     name: "Blush Safira Cores Variadas",
     price: 19.90,
     image: "img/179691af-2ffe-4378-b356-1fab83238041.jpeg",
-    stock: "Últimas unidades"
+   product.stock -= 5
   },
   {
     id: 3,
     name: "Iluminador Safira Cores Variadas",
     price: 13.90,
     image: "img/652ff3fb-9658-4305-b56b-0f8addd8934c.jpeg",
-    stock: "Últimas unidades"
+   product.stock -= 5
   },
   {
     id: 4,
     name: "Máscara de Cílios Efeito Boneca Safira",
     price: 14.90,
     image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg",
-    stock: 0
+product.stock -= 0
   
   },
   {
@@ -34,7 +34,7 @@ const products = [
     name: "Base líquida SARAH`S BEAUTY ",
     price: 14.90,
     image: "img/unnamed.jpg",
-    stock: 6
+product.stock -= 6
   
   },
   {
@@ -42,7 +42,7 @@ const products = [
     name: "Paleta de iluminador LOVE-max Love  ",
     price: 19.90,
     image: "img/775392d6-299c-4535-8f79-4dc112f15cfe.jpeg",
-    stock: "Últimas unidades"
+  product.stock -= 3
   
   },
   {
@@ -50,7 +50,7 @@ const products = [
     name: "Corretivo Líquido Lua & Neve",
     price: 14.90,
     image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg",
-    stock: 6
+ product.stock -= 6
   
   },
   {
@@ -58,7 +58,7 @@ const products = [
     name: "Pó Facial Rosa MOsqueta Fenzza",
     price: 14.90,
     image: "img/unnamed(1).jpg",
-    stock: 2
+product.stock -= 2
   
   },
   {
@@ -66,7 +66,7 @@ const products = [
     name: "Pó Facial Peach Power-Dapop",
     price: 14.90,
     image: "img/unnamed(2).jpg",
-    stock: 2
+    product.stock -= 2
   
   },
   {
@@ -74,7 +74,8 @@ const products = [
     name: "Lip Gloss Hudavioji",
     price: 19,90,
     image: "img/unnamed(3).jpg",
-    stock: 6
+   product.stock -= 6;
+
   
   }
 ];
@@ -334,6 +335,7 @@ document.addEventListener('keydown', function(event) {
         closeCart();
     }
 });
+
 
 
 
