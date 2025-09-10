@@ -1,4 +1,4 @@
-// Product data
+// Dados dos produtos
 const products = [
   {
     id: 1,
@@ -72,23 +72,28 @@ const products = [
   }
 ];
 
-// Verificação de carregamento do script e renderização dos produtos
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing app...');
-    renderProducts();  // Tente renderizar os produtos
+// Dados do carrinho
+let cart = [];
+
+// Atualizando o carrinho com os produtos
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM carregado, inicializando aplicação...');
+    renderProducts();  // Renderiza os produtos
+    updateCart();      // Atualiza o estado do carrinho
 });
 
+// Função para renderizar os produtos na página
 function renderProducts() {
-    console.log('Rendering products...');
+    console.log('Renderizando os produtos...');
     
     const productsGrid = document.getElementById('products-grid');
     if (!productsGrid) {
         console.error('Elemento "products-grid" não encontrado!');
         return;
     }
-    
+
     productsGrid.innerHTML = ''; // Limpa o grid antes de adicionar os produtos
-    
+
     products.forEach(product => {
         console.log('Criando card para o produto:', product.name);
         
@@ -99,7 +104,7 @@ function renderProducts() {
         const stockDisplay = product.stock <= 3 ? `Apenas ${product.stock} restantes!` : `${product.stock} em estoque`;
         
         productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy" onerror="console.error('Failed to load image: ${product.image}')">
+            <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy" onerror="console.error('Falha ao carregar imagem: ${product.image}')">
             <h2 class="product-name">${product.name}</h2>
             <span class="product-price">R$ ${product.price.toFixed(2)}</span>
             <div class="stock-info ${product.stock <= 3 ? 'low-stock' : ''} ${isOutOfStock ? 'out-of-stock' : ''}">
@@ -113,8 +118,76 @@ function renderProducts() {
         `;
         productsGrid.appendChild(productCard);
     });
-    
+
     console.log('Produtos renderizados com sucesso!');
 }
 
+// Função para adicionar produto ao carrinho
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product || product.stock <= 0) return;
 
+    // Atualiza o estoque do produto
+    product.stock--;
+
+    // Adiciona o produto ao carrinho
+    const cartItem = cart.find(item => item.id === productId);
+    if (cartItem) {
+        cartItem.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+
+    console.log(`${product.name} adicionado ao carrinho!`);
+
+    // Atualiza a exibição do carrinho
+    updateCart();
+    renderProducts();  // Re-renderiza os produtos (para atualizar o estoque)
+}
+
+// Função para atualizar a visualização do carrinho
+function updateCart() {
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
+    const cartSidebar = document.getElementById('cart-items');
+    const finishBtn = document.getElementById('finish-btn');
+
+    // Atualiza a contagem de itens no carrinho
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+
+    // Atualiza o total do carrinho
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    cartTotal.textContent = totalPrice.toFixed(2);
+
+    // Exibe os itens do carrinho
+    cartSidebar.innerHTML = '';
+    if (cart.length === 0) {
+        cartSidebar.innerHTML = '<div id="empty-cart" class="empty-cart">Seu carrinho está vazio</div>';
+    } else {
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <span class="cart-item-name">${item.name}</span>
+                <span class="cart-item-price">R$ ${item.price.toFixed(2)}</span>
+                <span class="cart-item-quantity">x${item.quantity}</span>
+            `;
+            cartSidebar.appendChild(cartItem);
+        });
+    }
+
+    // Habilita ou desabilita o botão de finalizar compra
+    finishBtn.disabled = cart.length === 0;
+}
+
+// Abrir e fechar o carrinho lateral
+document.getElementById('cart-btn').addEventListener('click', function () {
+    document.getElementById('cart-sidebar').style.display = 'block';
+    document.getElementById('cart-overlay').style.display = 'block';
+});
+
+document.getElementById('close-cart').addEventListener('click', function () {
+    document.getElementById('cart-sidebar').style.display = 'none';
+    document.getElementById('cart-overlay').style.display = 'none';
+});
