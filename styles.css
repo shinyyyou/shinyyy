@@ -22,7 +22,7 @@ body {
 /* ====== HEADER ====== */
 .shop-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     position: relative;
 }
 
@@ -46,6 +46,34 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+/* ====== BANNER CARROSSEL ====== */
+.banner-carousel {
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.banner-carousel .slides {
+    display: flex;
+    width: 300%;
+    animation: slide 12s infinite;
+}
+
+.banner-carousel .slides img {
+    width: 100%;
+    object-fit: cover;
+}
+
+@keyframes slide {
+    0% { transform: translateX(0%); }
+    33% { transform: translateX(-100%); }
+    66% { transform: translateX(-200%); }
+    100% { transform: translateX(0%); }
 }
 
 /* ====== PRODUTOS ====== */
@@ -76,7 +104,6 @@ body {
     background: #c2185b;
 }
 
-/* ====== GRID DE PRODUTOS ====== */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
