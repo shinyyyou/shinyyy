@@ -11,21 +11,33 @@
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <header class="shop-header">
             <h1 class="shop-title">Shinny You</h1>
             <p class="shop-subtitle">Seja Bem Vinda</p>
-            <span class="launch-badge">Lançamento Especial</span>
         </header>
 
-        <!-- Banner Carrossel -->
+        <!-- BANNER CARROSSEL -->
         <div class="banner-carousel">
             <div class="slides">
-                <img src="img/unnamed.jpg" alt="Banner 1">
+                <img src="img/banner1.jpg" alt="Banner 1">
                 <img src="img/banner2.jpg" alt="Banner 2">
                 <img src="img/banner3.jpg" alt="Banner 3">
             </div>
+
+            <!-- Setas -->
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+
+            <!-- Bolinhas -->
+            <div class="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
         </div>
 
+        <!-- PRODUTOS -->
         <main class="main-content">
             <div class="products-header">
                 <h2 class="products-title">Produtos em destaque</h2>
@@ -35,18 +47,18 @@
             </div>
 
             <div id="products-grid" class="products-grid">
-                <!-- Os produtos serão carregados aqui pelo JavaScript -->
+                <!-- Produtos carregados via JS -->
             </div>
         </main>
 
-        <!-- Carrinho -->
+        <!-- CARRINHO -->
         <aside id="cart-sidebar" class="cart-sidebar">
             <div class="cart-header">
                 <h3>Seu Carrinho</h3>
                 <button id="close-cart" class="close-btn">×</button>
             </div>
             <div id="cart-items" class="cart-items">
-                <div id="empty-cart" class="empty-cart">Seu carrinho está vazio</div>
+                <div class="empty-cart">Seu carrinho está vazio</div>
             </div>
             <div class="cart-footer">
                 <div class="cart-total">
@@ -56,9 +68,9 @@
             </div>
         </aside>
 
-        <!-- Overlay do Carrinho -->
         <div id="cart-overlay" class="cart-overlay"></div>
 
+        <!-- FOOTER -->
         <footer class="footer">
             © 2025 Shinny You
         </footer>
@@ -67,7 +79,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
