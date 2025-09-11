@@ -23,29 +23,6 @@ body {
 .shop-header {
     text-align: center;
     margin-bottom: 20px;
-    position: relative;
-}
-
-.shop-title {
-    font-size: 2.5rem;
-    color: #e91e63; /* rosa principal */
-    font-weight: 700;
-}
-
-.shop-subtitle {
-    font-size: 1.2rem;
-    color: #777;
-}
-
-.launch-badge {
-    background: #e91e63;
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    position: absolute;
-    top: 10px;
-    right: 10px;
 }
 
 /* ====== BANNER CARROSSEL ====== */
@@ -61,7 +38,7 @@ body {
 .banner-carousel .slides {
     display: flex;
     width: 300%;
-    animation: slide 12s infinite;
+    animation: slide 9s infinite; /* cada banner por 3 segundos */
 }
 
 .banner-carousel .slides img {
@@ -71,8 +48,8 @@ body {
 
 @keyframes slide {
     0% { transform: translateX(0%); }
-    33% { transform: translateX(-100%); }
-    66% { transform: translateX(-200%); }
+    33.33% { transform: translateX(-100%); }
+    66.66% { transform: translateX(-200%); }
     100% { transform: translateX(0%); }
 }
 
@@ -131,15 +108,20 @@ body {
     margin-bottom: 10px;
 }
 
-.product-card h3, .product-card h2 {
-    font-size: 1.1rem;
-    margin: 10px 0;
+/* ====== PADRÃO PARA TÍTULOS E PREÇOS ====== */
+.product-card .product-name {
+    font-size: 1.1rem; /* tamanho fixo */
+    font-weight: 600;
     color: #444;
+    margin: 10px 0;
+    min-height: 2.5em; /* altura uniforme */
 }
 
-.product-card p, .product-card .product-price {
-    color: #e91e63;
+.product-card .product-price {
+    font-size: 1rem; /* tamanho fixo */
     font-weight: 700;
+    color: #e91e63;
+    display: block;
     margin-bottom: 10px;
 }
 
