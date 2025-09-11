@@ -158,17 +158,18 @@ function resetInterval() { clearInterval(slideInterval); slideInterval = setInte
 document.getElementById("finish-btn").addEventListener("click", () => {
     if(cart.length === 0) return;
 
-    let message = "Olá, quero finalizar minha compra da Shinny You:\n";
+    let message = "Olá, Samya quero finalizar minha compra da Shinny You:\n";
     cart.forEach(item => {
         message += `- ${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
     });
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
     message += `Total: R$ ${total}\n`;
-    message += "Forma de pagamento: Pix ou Dinheiro";
+    
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5545998011346?text=${encodedMessage}`, "_blank");
 });
 
 // =====
+
 
