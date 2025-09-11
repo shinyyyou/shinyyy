@@ -47,6 +47,30 @@ function addToCart(productId) {
     }
 }
 
+// ====== ALTERAR QUANTIDADE NO CARRINHO ======
+function changeCartQuantity(productId, change) {
+    const cartItem = cart.find(item => item.id === productId);
+    const product = products.find(p => p.id === productId);
+
+    if(cartItem) {
+        cartItem.quantity += change;
+
+        if(cartItem.quantity <= 0) {
+            // retorna estoque do produto
+            product.stock += cartItem.quantity + 1; 
+            // remove do carrinho
+            cart = cart.filter(item => item.id !== productId);
+        } else {
+            // ajusta o estoque do produto
+            product.stock -= change;
+        }
+    }
+
+    updateCart();
+    renderProducts();
+}
+
+// ====== FUNÇÃO UPDATE CART COM BOTÕES ======
 function updateCart() {
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
@@ -60,13 +84,24 @@ function updateCart() {
     cartTotal.textContent = totalPrice.toFixed(2);
 
     cartSidebar.innerHTML = '';
-    if (cart.length === 0) cartSidebar.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
-    else cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `<span>${item.name} (x${item.quantity})</span><span>R$ ${(item.price * item.quantity).toFixed(2)}</span>`;
-        cartSidebar.appendChild(cartItem);
-    });
+    if (cart.length === 0) {
+        cartSidebar.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
+    } else {
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <span>${item.name} </span>
+                <div>
+                    <button class="cart-change-btn" onclick="changeCartQuantity(${item.id}, -1)">-</button>
+                    <span>x${item.quantity}</span>
+                    <button class="cart-change-btn" onclick="changeCartQuantity(${item.id}, 1)">+</button>
+                </div>
+                <span>R$ ${(item.price * item.quantity).toFixed(2)}</span>
+            `;
+            cartSidebar.appendChild(cartItem);
+        });
+    }
 
     finishBtn.disabled = cart.length === 0;
 }
@@ -120,24 +155,19 @@ dots.forEach((dot, i) => { dot.addEventListener('click', () => { currentSlide = 
 function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 3000); }
 
 // ====== WHATSAPP FINALIZAR COMPRA ======
-const whatsappNumber = "5545998011346"; // seu número
 document.getElementById("finish-btn").addEventListener("click", () => {
     if(cart.length === 0) return;
 
-    let message = "Olá, Samya quero finalizar minha compra da Shinny You:\n";
+    let message = "Olá, quero finalizar minha compra da Shinny You:\n";
     cart.forEach(item => {
         message += `- ${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
     });
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
     message += `Total: R$ ${total}\n`;
-    
+    message += "Forma de pagamento: Pix ou Dinheiro";
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+    window.open(`https://wa.me/5545998011346?text=${encodedMessage}`, "_blank");
 });
 
-// ====== INICIALIZAÇÃO ======
-renderProducts();
-updateCart();
-updateSlide();
-
+// =====
