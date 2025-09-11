@@ -114,43 +114,26 @@ function prevSlide() {
     updateSlide();
 }
 
-document.querySelector('.banner-carousel .next').addEventListener('click', () => {
-    nextSlide();
-    resetInterval();
-});
-
-document.querySelector('.banner-carousel .prev').addEventListener('click', () => {
-    prevSlide();
-    resetInterval();
-});
-
-dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-        currentSlide = i;
-        updateSlide();
-        resetInterval();
-    });
-});
-
-function resetInterval() {
-    clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 3000);
-}
+document.querySelector('.banner-carousel .next').addEventListener('click', () => { nextSlide(); resetInterval(); });
+document.querySelector('.banner-carousel .prev').addEventListener('click', () => { prevSlide(); resetInterval(); });
+dots.forEach((dot, i) => { dot.addEventListener('click', () => { currentSlide = i; updateSlide(); resetInterval(); }); });
+function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 3000); }
 
 // ====== WHATSAPP FINALIZAR COMPRA ======
-const whatsappNumber = "5545998011346"; // seu número (55=Brasil, 45=DDD)
+const whatsappNumber = "5545998011346"; // seu número
 document.getElementById("finish-btn").addEventListener("click", () => {
     if(cart.length === 0) return;
 
-    let message = "Olá, quero finalizar minha compra da Shinny You:%0A";
+    let message = "Olá, quero finalizar minha compra da Shinny You:\n";
     cart.forEach(item => {
-        message += `- ${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}%0A`;
+        message += `- ${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
     });
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
-    message += `Total: R$ ${total}%0A`;
+    message += `Total: R$ ${total}\n`;
     message += "Forma de pagamento: Pix ou Dinheiro";
 
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
 });
 
 // ====== INICIALIZAÇÃO ======
