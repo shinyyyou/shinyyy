@@ -1,4 +1,4 @@
-// Dados dos produtos
+// ====== PRODUTOS ======
 const products = [
     { id: 1, name: "Gloss Dream Safira", price: 15.90, image: "img/d160bb94-3c09-4014-817a-5dee7c7df901.jpeg", stock: 0 },
     { id: 2, name: "Blush Safira Cores Variadas", price: 19.90, image: "img/179691af-2ffe-4378-b356-1fab83238041.jpeg", stock: 5 },
@@ -14,15 +14,13 @@ const products = [
 
 let cart = [];
 
-// Função para renderizar os produtos
+// ====== FUNÇÕES PRODUTOS ======
 function renderProducts() {
     const productsGrid = document.getElementById('products-grid');
-    productsGrid.innerHTML = ''; 
-
+    productsGrid.innerHTML = '';
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
-
         const isOutOfStock = product.stock === 0;
         productCard.innerHTML = `
             <img src="${product.image}" alt="${product.name}" class="product-image">
@@ -37,25 +35,18 @@ function renderProducts() {
     });
 }
 
-// Função para adicionar um produto ao carrinho
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (product && product.stock > 0) {
-        product.stock--; 
-
+        product.stock--;
         const cartItem = cart.find(item => item.id === productId);
-        if (cartItem) {
-            cartItem.quantity++;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
-
+        if (cartItem) cartItem.quantity++;
+        else cart.push({ ...product, quantity: 1 });
         updateCart();
-        renderProducts(); 
+        renderProducts();
     }
 }
 
-// Função para atualizar o carrinho
 function updateCart() {
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
@@ -69,37 +60,84 @@ function updateCart() {
     cartTotal.textContent = totalPrice.toFixed(2);
 
     cartSidebar.innerHTML = '';
-    if (cart.length === 0) {
-        cartSidebar.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
-    } else {
-        cart.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                <span>${item.name} (x${item.quantity})</span>
-                <span>R$ ${(item.price * item.quantity).toFixed(2)}</span>
-            `;
-            cartSidebar.appendChild(cartItem);
-        });
-    }
+    if (cart.length === 0) cartSidebar.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
+    else cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `<span>${item.name} (x${item.quantity})</span><span>R$ ${(item.price * item.quantity).toFixed(2)}</span>`;
+        cartSidebar.appendChild(cartItem);
+    });
 
     finishBtn.disabled = cart.length === 0;
 }
 
-// Abrir e fechar carrinho
-function openCart() {
-    document.getElementById('cart-sidebar').classList.add('active');
-    document.getElementById('cart-overlay').classList.add('active');
+// ====== CARRINHO ======
+const cartBtn = document.getElementById('cart-btn');
+const cartSidebar = document.getElementById('cart-sidebar');
+const closeCartBtn = document.getElementById('close-cart');
+const cartOverlay = document.getElementById('cart-overlay');
+
+cartBtn.addEventListener('click', () => {
+    cartSidebar.classList.add('active');
+    cartOverlay.classList.add('active');
+});
+
+closeCartBtn.addEventListener('click', () => {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+});
+
+cartOverlay.addEventListener('click', () => {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+});
+
+// ====== BANNER INTERATIVO ======
+const slides = document.querySelector('.banner-carousel .slides');
+const totalSlides = slides.children.length;
+const dots = document.querySelectorAll('.banner-carousel .dot');
+let currentSlide = 0;
+let slideInterval = setInterval(nextSlide, 3000);
+
+function updateSlide() {
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
 }
 
-function closeCart() {
-    document.getElementById('cart-sidebar').classList.remove('active');
-    document.getElementById('cart-overlay').classList.remove('active');
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlide();
 }
 
-document.getElementById('cart-btn').addEventListener('click', openCart);
-document.getElementById('close-cart').addEventListener('click', closeCart);
-document.getElementById('cart-overlay').addEventListener('click', closeCart);
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlide();
+}
 
-// Inicia renderizando os produtos
+document.querySelector('.banner-carousel .next').addEventListener('click', () => {
+    nextSlide();
+    resetInterval();
+});
+
+document.querySelector('.banner-carousel .prev').addEventListener('click', () => {
+    prevSlide();
+    resetInterval();
+});
+
+dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+        currentSlide = i;
+        updateSlide();
+        resetInterval();
+    });
+});
+
+function resetInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 3000);
+}
+
+// ====== INICIALIZAÇÃO ======
 renderProducts();
+updateCart();
+updateSlide();
