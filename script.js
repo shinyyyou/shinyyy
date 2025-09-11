@@ -4,7 +4,7 @@ const products = [
     { id: 2, name: "Blush Safira Cores Variadas", price: 19.90, image: "img/179691af-2ffe-4378-b356-1fab83238041.jpeg", stock: 5 },
     { id: 3, name: "Iluminador Safira Cores Variadas", price: 13.90, image: "img/652ff3fb-9658-4305-b56b-0f8addd8934c.jpeg", stock: 5 },
     { id: 4, name: "Máscara de Cílios Efeito Boneca Safira", price: 14.90, image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg", stock: 0 },
-    { id: 5, name: "Base líquida SARAH`S BEAUTY", price: 14.90, image: "img/unnamed (5).jpg", stock: 6 },
+    { id: 5, name: "Base líquida SARAH`S BEAUTY", price: 14.90, image: "img/unnamed.jpg", stock: 6 },
     { id: 6, name: "Paleta de iluminador LOVE-max Love", price: 19.90, image: "img/775392d6-299c-4535-8f79-4dc112f15cfe.jpeg", stock: 3 },
     { id: 7, name: "Corretivo Líquido Lua & Neve", price: 14.90, image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg", stock: 6 },
     { id: 8, name: "Pó Facial Rosa MOsqueta Fenzza", price: 14.90, image: "img/unnamed (1).jpg", stock: 2 },
@@ -40,7 +40,7 @@ function addToCart(productId) {
     if (product && product.stock > 0) {
         product.stock--;
         const cartItem = cart.find(item => item.id === productId);
-        if (cartItem) cartItem.quantity++;
+        if(cartItem) cartItem.quantity++;
         else cart.push({ ...product, quantity: 1 });
         updateCart();
         renderProducts();
@@ -53,16 +53,19 @@ function changeCartQuantity(productId, change) {
     const product = products.find(p => p.id === productId);
 
     if(cartItem) {
-        cartItem.quantity += change;
+        // Se aumentar, verifica se tem estoque
+        if(change > 0 && product.stock > 0) {
+            cartItem.quantity++;
+            product.stock--;
+        }
 
-        if(cartItem.quantity <= 0) {
-            // retorna estoque do produto
-            product.stock += cartItem.quantity + 1; 
-            // remove do carrinho
-            cart = cart.filter(item => item.id !== productId);
-        } else {
-            // ajusta o estoque do produto
-            product.stock -= change;
+        // Se reduzir
+        if(change < 0) {
+            cartItem.quantity--;
+            product.stock++;
+            if(cartItem.quantity <= 0) {
+                cart = cart.filter(item => item.id !== productId);
+            }
         }
     }
 
@@ -70,7 +73,7 @@ function changeCartQuantity(productId, change) {
     renderProducts();
 }
 
-// ====== FUNÇÃO UPDATE CART COM BOTÕES ======
+// ====== UPDATE CART ======
 function updateCart() {
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
@@ -84,18 +87,17 @@ function updateCart() {
     cartTotal.textContent = totalPrice.toFixed(2);
 
     cartSidebar.innerHTML = '';
-    if (cart.length === 0) {
-        cartSidebar.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
-    } else {
+    if(cart.length === 0) cartSidebar.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
+    else {
         cart.forEach(item => {
             const cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
             cartItem.innerHTML = `
-                <span>${item.name} </span>
-                <div>
-                    <button class="cart-change-btn" onclick="changeCartQuantity(${item.id}, -1)">-</button>
-                    <span>x${item.quantity}</span>
-                    <button class="cart-change-btn" onclick="changeCartQuantity(${item.id}, 1)">+</button>
+                <span>${item.name}</span>
+                <div class="cart-controls">
+                    <button class="cart-btn" onclick="changeCartQuantity(${item.id}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="cart-btn" onclick="changeCartQuantity(${item.id}, 1)">+</button>
                 </div>
                 <span>R$ ${(item.price * item.quantity).toFixed(2)}</span>
             `;
@@ -127,7 +129,7 @@ cartOverlay.addEventListener('click', () => {
     cartOverlay.classList.remove('active');
 });
 
-// ====== BANNER INTERATIVO ======
+// ====== BANNER ======
 const slides = document.querySelector('.banner-carousel .slides');
 const totalSlides = slides.children.length;
 const dots = document.querySelectorAll('.banner-carousel .dot');
@@ -149,12 +151,16 @@ function prevSlide() {
     updateSlide();
 }
 
+dots.forEach((dot, i) => dot.addEventListener('click', () => { currentSlide = i; updateSlide(); resetInterval(); }));
 document.querySelector('.banner-carousel .next').addEventListener('click', () => { nextSlide(); resetInterval(); });
 document.querySelector('.banner-carousel .prev').addEventListener('click', () => { prevSlide(); resetInterval(); });
-dots.forEach((dot, i) => { dot.addEventListener('click', () => { currentSlide = i; updateSlide(); resetInterval(); }); });
-function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 3000); }
 
-// ====== WHATSAPP FINALIZAR COMPRA ======
+function resetInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 3000);
+}
+
+// ====== FINALIZAR COMPRA WHATSAPP ======
 document.getElementById("finish-btn").addEventListener("click", () => {
     if(cart.length === 0) return;
 
@@ -164,13 +170,13 @@ document.getElementById("finish-btn").addEventListener("click", () => {
     });
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
     message += `Total: R$ ${total}\n`;
-    
+   
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5545998011346?text=${encodedMessage}`, "_blank");
 });
 
-// =====
-
-
-
+// ====== INICIALIZAÇÃO ======
+renderProducts();
+updateCart();
+updateSlide();
