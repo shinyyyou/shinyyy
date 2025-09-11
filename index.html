@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shinny You</title>
-    <meta name="description" content="">
-    <meta name="author" content="Shinny You">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,12 +15,20 @@
             <p class="shop-subtitle">Seja Bem Vinda</p>
         </header>
 
-        <!-- BANNER CARROSSEL -->
+        <!-- BANNER -->
         <div class="banner-carousel">
             <div class="slides">
-                <img src="img/unnamed (4).jpg" alt="Banner 1">
-                
-            
+                <img src="img/banner1.jpg" alt="Banner 1">
+                <img src="img/banner2.jpg" alt="Banner 2">
+                <img src="img/banner3.jpg" alt="Banner 3">
+            </div>
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+            <div class="dot-container">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
         </div>
 
         <!-- PRODUTOS -->
@@ -33,9 +39,8 @@
                     🛒 Carrinho (<span id="cart-count">0</span>)
                 </button>
             </div>
-
             <div id="products-grid" class="products-grid">
-                <!-- Produtos carregados via JS -->
+                <!-- Produtos carregados pelo JS -->
             </div>
         </main>
 
@@ -56,6 +61,7 @@
             </div>
         </aside>
 
+        <!-- OVERLAY DO CARRINHO -->
         <div id="cart-overlay" class="cart-overlay"></div>
 
         <!-- FOOTER -->
@@ -64,12 +70,7 @@
         </footer>
     </div>
 
+    <!-- JS -->
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
