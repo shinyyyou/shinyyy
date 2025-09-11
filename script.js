@@ -137,6 +137,22 @@ function resetInterval() {
     slideInterval = setInterval(nextSlide, 3000);
 }
 
+// ====== WHATSAPP FINALIZAR COMPRA ======
+const whatsappNumber = "5545998011346"; // seu número (55=Brasil, 45=DDD)
+document.getElementById("finish-btn").addEventListener("click", () => {
+    if(cart.length === 0) return;
+
+    let message = "Olá, quero finalizar minha compra da Shinny You:%0A";
+    cart.forEach(item => {
+        message += `- ${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}%0A`;
+    });
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    message += `Total: R$ ${total}%0A`;
+    message += "Forma de pagamento: Pix ou Dinheiro";
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+});
+
 // ====== INICIALIZAÇÃO ======
 renderProducts();
 updateCart();
