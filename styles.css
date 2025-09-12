@@ -103,10 +103,10 @@ body {
     border-radius: 5px;
 }
 
-/* Grid de produtos responsivo */
+/* Grid de produtos responsivo - produtos lado a lado */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
     margin-bottom: 40px;
 }
