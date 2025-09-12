@@ -52,6 +52,7 @@ body {
     object-fit: cover;
 }
 
+/* Pontinhos do banner */
 .banner-carousel .dot-container {
     position: absolute;
     bottom: 10px;
@@ -74,21 +75,11 @@ body {
     opacity: 1;
 }
 
+/* Removendo as setas do banner */
 .banner-carousel .prev,
 .banner-carousel .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    background: rgba(255,255,255,0.5);
-    border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
+    display: none;
 }
-
-.banner-carousel .prev { left: 10px; }
-.banner-carousel .next { right: 10px; }
 
 /* ====== PRODUTOS ====== */
 .products-header {
@@ -112,6 +103,7 @@ body {
     border-radius: 5px;
 }
 
+/* Grid de produtos responsivo */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
