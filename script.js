@@ -6,11 +6,11 @@ const products = [
     { id: 4, name: "Máscara de Cílios Efeito Boneca Safira", price: 14.90, image: "img/a5d9b425-dad8-4be2-a277-d14e0511435e.jpeg", stock: 0 },
     { id: 5, name: "Base líquida SARAH`S BEAUTY", price: 14.90, image: "img/unnamed (5).jpg", stock: 5 },
     { id: 6, name: "Paleta de iluminador LOVE-max Love", price: 19.90, image: "img/775392d6-299c-4535-8f79-4dc112f15cfe.jpeg", stock: 3 },
-    { id: 7, name: "Corretivo Líquido Lua & Neve", price: 14.90, image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg", stock: 5 },
+    { id: 7, name: "Corretivo Líquido Lua & Neve", price: 14.90, image: "img/cb9c3f40-ece2-41ab-923c-90b0bd6105e2.jpeg", stock: 4 },
     { id: 8, name: "Pó Facial Rosa MOsqueta Fenzza", price: 14.90, image: "img/unnamed (1).jpg", stock: 1 },
     { id: 9, name: "Pó Facial Peach Power-Dapop", price: 14.90, image: "img/unnamed (2).jpg", stock: 2 },
-    { id: 10, name: "Lip Gloss Hudavioji", price: 19.90, image: "img/lip_gloss_chaveiro_cor_01_a_06_com_24un_de_10ml_hudamoji_22833_2_913f56393de86b5f05b7f3cf1b13fa6f.webp", stock: 5 },
-    { id: 11, name: "Curvador de cílios curvex Mandala", price: 14.90, image: "img/unnamed11.jpg", stock: 2 }
+    { id: 10, name: "Lip Gloss Hudavioji", price: 19.90, image: "img/lip_gloss_chaveiro_cor_01_a_06_com_24un_de_10ml_hudamoji_22833_2_913f56393de86b5f05b7f3cf1b13fa6f.webp", stock: 3 },
+    { id: 11, name: "Curvador de cílios curvex Mandala", price: 14.90, image: "img/unnamed11.jpg", stock: 0 }
 ];
 
 
@@ -182,6 +182,7 @@ document.getElementById("finish-btn").addEventListener("click", () => {
 renderProducts();
 updateCart();
 updateSlide();
+
 
 
 
