@@ -13,7 +13,7 @@ const products = [
     { id: 11, name: "Curvador de cílios curvex Mandala", price: 14.90, image: "img/unnamed11.jpg", stock: 0 },
     { id: 12, name: "Blush dois tons", price: 9.90, image: "img/8c9e5f64-53ab-4c5e-8287-236347b370a8.jpeg", stock: 1 },
     { id: 13, name: "Kit Paleta + Gloss", price: 14.90, image: "img/6e9a71a6-bb51-4552-99ca-a49886720940.jpeg", stock: 2 },
-    { id: 14, name: "Mini Paleta multifuncional", price: 24.90, image: "img/48e1908e-277f-41b3-aae7-ae7c90de487f.jpeg", stock: 1 }
+    { id: 14, name: "Mini Paleta multifuncional", price: 24.90, image: "img/minipaleta.jpeg", stock: 1 }
 
 
 
@@ -188,6 +188,7 @@ document.getElementById("finish-btn").addEventListener("click", () => {
 renderProducts();
 updateCart();
 updateSlide();
+
 
 
 
